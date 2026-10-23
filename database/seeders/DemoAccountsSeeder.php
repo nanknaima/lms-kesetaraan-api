@@ -45,6 +45,10 @@ class DemoAccountsSeeder extends Seeder
                 ['nama_mapel' => 'Matematika', 'paket' => 'B'],
             );
 
+            if ($mapel->nama_mapel !== 'Matematika' || $mapel->paket !== 'B') {
+                throw new RuntimeException('Demo seeding dibatalkan: kode mapel MTK-B sudah dipakai untuk data lain.');
+            }
+
             $accounts = [
                 [
                     'nama' => 'Admin Demo',

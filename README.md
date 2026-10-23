@@ -93,7 +93,9 @@ atau nilai kredensial database.
 Gunakan hanya pada database TiDB yang terisolasi dan berisi data palsu. Seeder berikut
 hanya membuat/memperbarui tiga email demo yang ditentukan, mereset token milik ketiga akun
 tersebut, dan membatalkan transaksi jika NIP/NIS target dipakai akun lain atau nama database
-tidak cocok. Seeder tidak menghapus akun atau data lain.
+tidak cocok. Seeder menggunakan mapel Paket B berkode `MTK-B` untuk profil guru; mapel demo
+dibuat hanya jika belum ada, dan proses dibatalkan jika kode itu sudah berisi data lain.
+Seeder tidak menghapus akun atau data lain.
 
 Di salinan lokal privat `backend/.env`, isi `DEMO_DATA_ONLY=true`,
 `ALLOW_DEMO_ACCOUNT_RESET=true`, `DEMO_DATABASE_NAME` dengan nama database TiDB demo yang
