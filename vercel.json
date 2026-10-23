@@ -6,6 +6,7 @@
       "runtime": "vercel-php@0.6.2"
     }
   },
+  "buildCommand": "rm -f bootstrap/cache/*.php && composer dump-autoload",
   "routes": [
     {
       "src": "/css/(.*)",
