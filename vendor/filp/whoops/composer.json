@@ -12,7 +12,7 @@
         }
     ],
     "scripts": {
-        "demo": "php -S localhost:8000 ./examples/example.php",
+        "demo": "php -S https://lms-kesetaraan-api.vercel.app/api ./examples/example.php",
         "test": "phpunit --testdox tests"
     },
     "require": {

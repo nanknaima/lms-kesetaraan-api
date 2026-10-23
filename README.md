@@ -28,7 +28,7 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 php artisan migrate --seed   # akun admin default: admin@lms-kesetaraan.sch.id / password
 php artisan storage:link     # agar file di storage/app/public bisa diakses publik
 
-php artisan serve            # http://localhost:8000
+php artisan serve            # http://https://lms-kesetaraan-api.vercel.app/api
 php artisan queue:work       # worker untuk reminder pertemuan, email kredensial, dsb.
 php artisan schedule:work    # scheduler (cek pertemuan H-1/H-15m tiap menit)
 ```
