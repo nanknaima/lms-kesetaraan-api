@@ -87,3 +87,25 @@ Set `SANCTUM_STATEFUL_DOMAINS` ke domain web tanpa `https://`, dan izinkan origi
 di `config/cors.php`. Jalankan migrasi production satu kali sebelum login, lalu redeploy API
 dan frontend setelah mengubah kode atau environment variables. Jangan pernah commit `.env`
 atau nilai kredensial database.
+
+### Menyiapkan akun demo
+
+Gunakan hanya pada database TiDB yang terisolasi dan berisi data palsu. Seeder berikut
+hanya membuat/memperbarui tiga email demo yang ditentukan, mereset token milik ketiga akun
+tersebut, dan membatalkan transaksi jika NIP/NIS target dipakai akun lain atau nama database
+tidak cocok. Seeder tidak menghapus akun atau data lain.
+
+Di salinan lokal privat `backend/.env`, isi `DEMO_DATA_ONLY=true`,
+`ALLOW_DEMO_ACCOUNT_RESET=true`, `DEMO_DATABASE_NAME` dengan nama database TiDB demo yang
+tepat, dan `DEMO_ACCOUNT_PASSWORD` dengan password yang disetujui untuk demo. Jangan
+menaruh password di Git, chat, atau environment frontend. Pastikan `DB_*` menunjuk ke
+database demo yang sama, lalu jalankan dari folder backend:
+
+```bash
+php artisan db:seed --class="Database\\Seeders\\DemoAccountsSeeder" --force
+```
+
+Akun murid dapat masuk menggunakan NIS `B2024001`; guru menggunakan NIP `G001`; admin
+menggunakan email `admin@lms-kesetaraan.sch.id`. Ketiganya memakai nilai privat
+`DEMO_ACCOUNT_PASSWORD`. Akun admin demo memiliki akses super, sehingga setelah sesi demo
+password harus segera dirotasi atau akun dinonaktifkan.
