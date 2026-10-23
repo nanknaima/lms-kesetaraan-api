@@ -71,3 +71,19 @@ controller yang sudah lengkap di sebelahnya bila ingin melengkapinya lebih detai
    mudah dibaca sebagai referensi awal.
 5. Tambahkan `AuditLogObserver` (lihat `app/Observers`, saat ini masih kosong) ke model
    penting (`NilaiAkhir`, `User`) untuk memenuhi aturan bisnis #15 (audit trail penuh).
+
+## Deploy API ke Vercel
+
+Hubungkan repo backend ke Vercel dan gunakan root directory repo backend. Isi environment
+variables untuk Production: `APP_ENV=production`, `APP_DEBUG=false`, `APP_KEY`,
+`APP_URL=https://lms-kesetaraan-api.vercel.app`, serta `DB_CONNECTION=mysql` dan
+`DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` dari penyedia database.
+Jangan gunakan `localhost` sebagai host database terkelola.
+
+Koneksi MySQL/TiDB menggunakan TLS dengan verifikasi sertifikat. Secara default API memakai
+sertifikat ISRG Root X1 di `config/cancert.pem`; jika penyedia database memberi CA lain,
+simpan CA itu pada repo backend privat dan atur `DB_SSL_CA` ke path file tersebut.
+Set `SANCTUM_STATEFUL_DOMAINS` ke domain web tanpa `https://`, dan izinkan origin web HTTPS
+di `config/cors.php`. Jalankan migrasi production satu kali sebelum login, lalu redeploy API
+dan frontend setelah mengubah kode atau environment variables. Jangan pernah commit `.env`
+atau nilai kredensial database.
