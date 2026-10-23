@@ -25,6 +25,14 @@ return [
     // kunjung aktif walau sudah lewat jadwalnya menurut jam guru sendiri.
     'timezone' => env('APP_TIMEZONE', 'Asia/Taipei'),
 
+    'demo_data_only' => env('DEMO_DATA_ONLY', false),
+
+    'allow_demo_account_reset' => env('ALLOW_DEMO_ACCOUNT_RESET', false),
+
+    'demo_database_name' => env('DEMO_DATABASE_NAME'),
+
+    'demo_account_password' => env('DEMO_ACCOUNT_PASSWORD'),
+
     'locale' => env('APP_LOCALE', 'id'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),

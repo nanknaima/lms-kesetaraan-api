@@ -13,16 +13,16 @@ class DemoAccountsSeeder extends Seeder
 {
     public function run(): void
     {
-        if (env('DEMO_DATA_ONLY') !== true && env('DEMO_DATA_ONLY') !== 'true') {
+        if (! config('app.demo_data_only')) {
             throw new RuntimeException('Demo seeding dibatalkan: set DEMO_DATA_ONLY=true hanya untuk database terisolasi.');
         }
 
-        if (env('ALLOW_DEMO_ACCOUNT_RESET') !== true && env('ALLOW_DEMO_ACCOUNT_RESET') !== 'true') {
+        if (! config('app.allow_demo_account_reset')) {
             throw new RuntimeException('Demo seeding dibatalkan: set ALLOW_DEMO_ACCOUNT_RESET=true untuk mengizinkan reset akun.');
         }
 
-        $password = env('DEMO_ACCOUNT_PASSWORD');
-        $expectedDatabase = env('DEMO_DATABASE_NAME');
+        $password = config('app.demo_account_password');
+        $expectedDatabase = config('app.demo_database_name');
 
         if (! is_string($password) || $password === '') {
             throw new RuntimeException('Demo seeding dibatalkan: DEMO_ACCOUNT_PASSWORD belum diisi.');
