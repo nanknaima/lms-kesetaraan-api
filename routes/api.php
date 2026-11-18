@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\DashboardController;
+use App\Http\Controllers\Api\Admin\HonorController;
+use App\Http\Controllers\Api\Admin\KeuanganController;
+use App\Http\Controllers\Api\Admin\PembayaranController;
 use App\Http\Controllers\Api\Admin\PendaftaranController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
@@ -75,6 +78,20 @@ Route::middleware('auth:sanctum')->group(function () {
     // ── ADMIN ────────────────────────────────────────────────────────
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', DashboardController::class);
+
+        Route::get('/pembayaran', [PembayaranController::class, 'index']);
+        Route::post('/pembayaran', [PembayaranController::class, 'store']);
+        Route::get('/pembayaran/{tagihan}', [PembayaranController::class, 'show']);
+        Route::post('/pembayaran/{tagihan}/catat', [PembayaranController::class, 'catat']);
+        Route::delete('/pembayaran/{tagihan}', [PembayaranController::class, 'destroy']);
+
+        Route::get('/rekap-honor', [HonorController::class, 'index']);
+        Route::post('/rekap-honor', [HonorController::class, 'store']);
+        Route::put('/rekap-honor/{honor}', [HonorController::class, 'update']);
+        Route::post('/rekap-honor/{honor}/bayar', [HonorController::class, 'bayar']);
+
+        Route::get('/keuangan', [KeuanganController::class, 'index']);
+        Route::post('/keuangan', [KeuanganController::class, 'store']);
 
         Route::apiResource('guru', \App\Http\Controllers\Api\Admin\GuruController::class);
         Route::apiResource('murid', \App\Http\Controllers\Api\Admin\MuridController::class);
